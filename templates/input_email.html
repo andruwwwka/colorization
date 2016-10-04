@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content_header %}
+    <!-- Header -->
+    <header id="top" class="header">
+
+        <div  class="text-vertical-center">
+            <div class="container">
+                <div class="row titleRow">
+                    <div class="col-sm-12">
+                        <h4 class="bottomTitle"><strong>Deep<img id="logoPic" src="{% static "img/logo_40.png" %}">Colorization</strong>
+                        </h4>
+                        <p class="bottomTitle">Service coloring pictures</p>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 col-sm-offset-4">
+                        <div class="jumbotron">
+                            <p class="linkText">Thank you for using our service!</p>
+                        </div>
+                    </div>
+                </div>
+                <form id="email_form" action="{% url 'home' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p class="emailText">Write your email and we will notify you when the image is ready.</p><br>
+                            <input type="hidden" name="convert_id" value={{ convert_id }}>
+                            <input type="email" name="email" placeholder="your@email.com" required autocomplete="off"><a href="#" class="btn btn-dark" onclick="document.getElementById('email_form').submit()">Send Address</a>
+                            <div class="bottomRow">
+                                <a href="http://deepcol.com/"><i class="fa fa-dribbble fa-fw"></i> deepcol.com</a>
+                                <p id="copyright" class="text-muted">&copy; Deep Colorization 2016</p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+      </div>
+
+
+    </header>
+{% endblock %}

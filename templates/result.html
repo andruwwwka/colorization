@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content_header %}
+    <!-- Header -->
+    <header id="top" class="header">
+
+        <div  class="text-vertical-center">
+            <div class="container">
+                <div class="row titleRow">
+                    <div class="col-sm-12">
+                        <h4 class="bottomTitle"><strong>Deep<img id="logoPic" src="{% static "img/logo_40.png" %}">Colorization</strong>
+                        </h4>
+                        <p class="bottomTitle">Service coloring pictures</p>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <img id="picResault" src="{% static url_color %}" class="img-thumbnail img-responsive picResault">
+                    </div>
+                </div>
+                <form id="load_img_form" action="{% url 'result' hash_str=hash_str%}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <img class="arrowImg picArr" src="{% static "img/arrow_1000.png" %}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p class="likeLine">
+                                <i id="like" class="fa fa-lg fa-thumbs-o-up likeHand"></i>
+                                <i id="dislike" class="fa fa-lg fa-thumbs-o-down dislikeHand"></i>
+                            </p>
+                            <a href="#" class="btn btn-dark" onclick="document.getElementById('load_img_form').submit()">Save Photo</a>
+                            <div class="bottomRow">
+                                <a href="http://deepcol.com/"><i class="fa fa-dribbble fa-fw"></i> deepcol.com</a>
+                                <p id="copyright" class="text-muted">&copy; Deep Colorization 2016</p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </header>
+{% endblock %}
+
+{% block additional_script %}
+    <script>
+        $('#picResault').mouseenter(function(){
+            $('#picResault').attr("src","{% static url_black %}")
+        });
+        $( "#picResault" ).mouseleave(function() {
+            $('#picResault').attr("src","{% static url_color %}")
+        });
+        document.getElementById('like').onclick=function(){
+            $.post('#', {like: true, csrfmiddlewaretoken:'{{ csrf_token }}'})
+        };
+        document.getElementById('dislike').onclick=function(){
+            $.post('#', {like: false, csrfmiddlewaretoken:'{{ csrf_token }}'})
+        };
+    </script>
+{% endblock %}

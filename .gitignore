@@ -1,0 +1,5 @@
+/static/upload_images
+/main/local_settings.py
+/.idea
+/matrix
+*.pyc

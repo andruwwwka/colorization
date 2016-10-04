@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Deep Colorization</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/stylish-portfolio.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header id="top" class="header">
+
+        <div  class="text-vertical-center">
+            <div class="container">
+                <div class="row titleRow">
+                    <div class="col-sm-12">
+                        <h4 class="bottomTitle"><strong>Deep<img id="logoPic" src="img/logo_40.png">Colorization</strong>
+                        </h4>
+                        <p class="bottomTitle">Service coloring pictures</p>
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <img src="img/picA.jpg" class="img-thumbnail img-responsive picAB">
+                         <img src="img/picB.jpg" class="img-thumbnail img-responsive picAB">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <img class="arrowImg picArr" src="img/arrow_1000.png">
+                        
+                        <div class="upload">
+                            <input type="file" name="upload"/>
+                        </div>
+                        <a href="#about" class="btn btn-dark btn-dark-convert">Convert</a>
+                        <div class="bottomRow">
+                            <a href="http://deepcol.com/"><i class="fa fa-dribbble fa-fw"></i> deepcol.com</a>
+                            <p id="copyright" class="text-muted">&copy; Deep Colorization 2016</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <script src="js/jQueryRotate.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script>
+    // Closes the sidebar menu
+    $("#menu-close").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    // Opens the sidebar menu
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    // Scrolls to the selected menu item on the page
+    $(function() {
+        $('a[href*=#]:not([href=#])').click(function() {
+            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                if (target.length) {
+                    $('html,body').animate({
+                        scrollTop: target.offset().top
+                    }, 1000);
+                    return false;
+                }
+            }
+        });
+    });
+
+    var angle = 0;
+    var mouseAngle = 0;
+    var innerc = 0;
+    setInterval(function(){
+        angle+=3;
+        if (mouseAngle > 0) {
+            mouseAngle = mouseAngle - 1;
+            angle = angle + mouseAngle -1;
+        }
+        if (innerc < 1) {
+            if (mouseAngle < 5) {
+                innerc = 90;
+                mouseAngle = 0;
+            }
+        } else {
+            angle=angle + 2;
+            innerc = innerc - 2;
+        }
+        $('#logoPic').rotate(angle);
+    },10);
+    $('body').mousemove(function(){
+        angle = angle + 36;
+        if (mouseAngle < 180) mouseAngle = mouseAngle + 3;
+        // $('#copyright').html(angle);
+        $('#logoPic').rotate(angle);
+    });
+
+    </script>
+
+</body>
+
+</html>
